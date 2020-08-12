@@ -1,0 +1,19 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.logo{
+    margin-top: -1.7rem;
+    margin-bottom: -3rem;
+    margin-left: 4rem;
+}
+.bg-burger{
+    background-color:honeydew;
+}
+#trang-chu{
+    font-size: 20px;
+    font-weight: bold;
+}
+#thuc-don{
+    font-size: 20px;
+    font-weight: bold;
+}
