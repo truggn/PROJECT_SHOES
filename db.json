@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "username": "Username",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "id": "de3ksF01L"
+    },
+    {
+      "username": "Username",
+      "email": "vantrungarsenal@gmail.com",
+      "password": "ádasd",
+      "id": "sn1LO923b"
+    },
+    {
+      "username": "trung@gmail.com",
+      "email": "vantrungarsenal@gmail.com",
+      "password": "ádasd",
+      "id": "alHzDjSvQ"
+    }
+  ]
+}
