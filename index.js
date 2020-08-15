@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const handlebars = require('express-handlebars');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 
 const app = express();
@@ -20,9 +20,12 @@ app.engine('hbs' , handlebars({
 app.set('view engine' , 'hbs');
 app .set('views' , path.join(__dirname,'src','views'));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cookieParser())
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.use(cookieParser());
+app.use(morgan('combined'));
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
