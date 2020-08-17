@@ -7,9 +7,8 @@ const morgan = require('morgan');
 
 
 const app = express();
-const homeRoute = require('./routes/home.route');
-const productsRoute = require('./routes/products.route');
-const khuyenmaiRoute = require('./routes/khuyenmai.route');
+const router = require('./routes');
+
 
 
 const port= 4000;
@@ -29,8 +28,8 @@ app.use(morgan('combined'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/' , homeRoute);
-app.use('/' , productsRoute);
-app.use('/', khuyenmaiRoute);
+// router init
+router(app);
+
 
 app.listen(port , () => console.log(`Project app listenning on port ${port}`))

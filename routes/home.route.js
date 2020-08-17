@@ -1,15 +1,11 @@
 const express = require('express');
-const homeCtrl = require('../controller/home.controller');
 
 const router = express.Router();
 
-router.get('/home', homeCtrl.home);
+const homeController = require('../controller/home.controller');
 
-router.get('/login' , homeCtrl.login);
-
-router.get('/register' , homeCtrl.register);
-
-router.post('/register' , homeCtrl.createPostUser);
+router.use('/:slug', homeController.show); 
+router.use('/' , homeController.index);
 
 
 
