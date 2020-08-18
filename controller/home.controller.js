@@ -1,16 +1,20 @@
-const db = require('../db');
-const shortid = require('shortid');
-
+const Product = require('../modules/products');
+const { mutipleMongooseToObject} = require('../util/mongoose');
 
 class homeController{
     
     // [GET] -> home 
-    index(req , res){
-        res.render('home/index');
+    index(req , res , next){
+        Product.find({})
+            .then(products => {  
+                res.render('home/index', {
+                    products: mutipleMongooseToObject(products)}); 
+                })
+                .catch(next);       
     }
     // [GET] // :slug
-    show(req, res){
-        res.send("home");
+    show(req, res , next){
+        res.send('slug')
     }
 
 }

@@ -4,8 +4,8 @@ const router = express.Router();
 
 const homeController = require('../controller/home.controller');
 
-router.use('/:slug', homeController.show); 
-router.use('/' , homeController.index);
+router.get('/:slug', homeController.show); 
+router.get('/' , homeController.index);
 
 
 
