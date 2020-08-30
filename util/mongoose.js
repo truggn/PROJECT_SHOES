@@ -5,7 +5,7 @@ module.exports= {
     },
     // ham xu ly chi tiet 
     mongooseToObject: function(mongoose){
-        return mongoose ? toObject : mongoose;
+        return mongoose ? mongoose.toObject() : mongoose;
     },
 
 };

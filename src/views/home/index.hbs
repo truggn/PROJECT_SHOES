@@ -114,13 +114,12 @@
 						{{#each products}}
 							<div class="col-md-3 special-products-grid text-center">
 								<!--<a class="brand-name" href="single-page.html"><img src="images/b1.jpg" title="name" /></a> -->
-								<a class="product-here" href="single-page.html"><img src="{{this.image}}" title="{{this.name}}" /></a>
-								<h4><a href="single-page.html">{{this.name}}</a></h4>
+								<a class="product-here" href="/product/{{this.slug}}"><img src="/images/{{this.image}}" title="{{this.name}}" /></a>
+								<h4><a href="/product/{{this.slug}}">{{this.name}}</a></h4>
 								<a class="product-btn" href="single-page.html"><span>{{this.price}}$</span><small>GET NOW</small><label> </label></a>
 							</div>
 						{{/each}}
 							<!-- END VIEW SHOW PRODUCTS-->
-
 
 						<div class="clearfix"> </div>
 					</div>

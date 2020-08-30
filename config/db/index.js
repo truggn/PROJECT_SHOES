@@ -1,5 +1,7 @@
 
 const mongoose = require('mongoose');
+
+
 async function connect(){
         try {
             await mongoose.connect('mongodb://127.0.0.1/Project_Shoes', {
@@ -14,4 +16,5 @@ async function connect(){
                 console.log('Connect db False!');
         }
 }
+
 module.exports = { connect };
