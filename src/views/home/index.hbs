@@ -113,8 +113,8 @@
 						<!-- VIEW SHOW PRODUCTS-->
 						{{#each products}}
 							<div class="col-md-3 special-products-grid text-center">
-								<!--<a class="brand-name" href="single-page.html"><img src="images/b1.jpg" title="name" /></a> -->
-								<a class="product-here" href="/product/{{this.slug}}"><img src="/images/{{this.image}}" title="{{this.name}}" /></a>
+								<a class="brand-name" href="single-page.html"><img src="/uploads/{{this.image}}" title="name" /></a> 
+								<a class="product-here" href="/product/{{this.slug}}"><img src="/uploads/{{this.image}}" title="{{this.name}}" /></a>
 								<h4><a href="/product/{{this.slug}}">{{this.name}}</a></h4>
 								<a class="product-btn" href="single-page.html"><span>{{this.price}}$</span><small>GET NOW</small><label> </label></a>
 							</div>

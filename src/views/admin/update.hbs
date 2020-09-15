@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="mt-4">
+    <h3>Danh sach san pham</h3>
+
+            <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Ten san pham</th>
+                <th scope="col">Gia ban</th>
+                <th scope="col">Loai</th>
+                <th scope="col">Thoi gian tao</th>
+                <th scope="col">Update</th>
+                <th scope="col">Xoa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+                <tr>
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.price}}</td>
+                    <td>{{this.slug}}</td>
+                    <td>{{this.price}}</td>
+                    <td>@mdo</td>
+                </tr>
+            {{/each}}
+        </tbody>
+        </table>
+</div>
+</div>

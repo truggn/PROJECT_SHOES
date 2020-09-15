@@ -14,7 +14,7 @@ class siteController{
     register(req, res){
         res.render("home/register");
     }
-                //[POST] // Register Post Users ////////////////////////////////////////
+    //[POST] // Register Post Users ////////////////////////////////////////
 
     createPostUser(req, res, next){
 
@@ -32,7 +32,7 @@ class siteController{
                     .catch(Error =>{})
                 })
             }else{
-                res.json({err: 'Email đã được sử dụng'})
+                res.json({err: 'Email đã được sử dụng'});
             }
         })
 

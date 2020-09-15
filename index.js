@@ -8,6 +8,7 @@ const db = require('./config/db');
 
 
 
+
 // connect to db 
 db.connect();
 
@@ -15,15 +16,23 @@ db.connect();
 const app = express();
 const router = require('./routes');
 
-
-
 const port= 4000;
-// template engine
+// template engine, 
 app.engine('hbs' , handlebars({
-    extname: '.hbs'
+    extname: '.hbs',
+    defaultView: 'main',
+    layoutsDir: __dirname + '/src/views/',
+    partialsDir: __dirname + '/src/views/partials/',
+    helpers:{
+        sum : (a, b ) => a + b 
+    }
+
 }));
+
+
 app.set('view engine' , 'hbs');
-app .set('views' , path.join(__dirname,'src','views'));
+app.set('views' , path.join(__dirname,'src','views'));
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -35,6 +44,8 @@ app.use(morgan('combined'));
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 // router init
 router(app);

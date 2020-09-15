@@ -1,6 +1,7 @@
 const express = require('express');
 
 const siteController = require('../controller/site.controller');
+const authMiddleware = require('../middleware/auth.middleware');
 
 const {UserValidator} = require('../validate/register.validate');
 
