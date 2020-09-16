@@ -1,0 +1,13 @@
+<div class="ml-3 mt-3 mb-3">
+    <form method="POST" action="/admin/{{products.name}}?_method=PUT">
+  <div class="form-group">
+    <label for="text">Tên sản phẩm:</label>
+    <input type="text" class="form-control" id="nameproduct" name="name" value="{{products.name}}">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Giá bán:</label>
+    <input type="text" class="form-control" id="giaban" name="price" value="{{products.price}}">
+  </div>
+  <button type="submit" class="btn btn-primary">Lưu Lại</button>
+</form>
+</div>

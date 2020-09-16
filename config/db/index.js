@@ -6,7 +6,8 @@ async function connect(){
         try {
             await mongoose.connect('mongodb://127.0.0.1/Project_Shoes', {
                 useNewUrlParser: true,
-                useUnifiedTopology: true
+                useUnifiedTopology: true,
+                useCreateIndex: true,
                 });
 
                 console.log("Connect db Successfully");

@@ -12,7 +12,9 @@ class productController{
                     res.render('product/show' , { products: mongooseToObject(products)});
                 }) 
                 .catch(next);
-    }
+    };
+
+    
 
 };
 

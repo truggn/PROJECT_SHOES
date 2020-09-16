@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const handlebars = require('express-handlebars');
 const cookieParser = require('cookie-parser');
+const methodOverride = require('method-override');
 const morgan = require('morgan');
 const db = require('./config/db');
 
@@ -37,7 +38,7 @@ app.set('views' , path.join(__dirname,'src','views'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-
+app.use(methodOverride('_method'));
 
 app.use(cookieParser());
 app.use(morgan('combined'));
