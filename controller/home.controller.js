@@ -5,7 +5,7 @@ class homeController{
     
     // [GET] -> home 
     index(req , res , next){
-        Product.find({})
+        Product.find({deletedAt: null}) // chi lay ra nhung ban ghi chua xoa 
             .then(products => {  
                 res.render('home/index', {
                     products: mutipleMongooseToObject(products)}); 

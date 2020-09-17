@@ -2,13 +2,15 @@
 <html>
 	<head>
 		<title>Brnd-logo Website Template | Home :: w3layouts</title>
-		<link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="../js/jquery.min.js"></script>
+		
+		<link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
+		
 		 <!-- Custom Theme files -->
 		<link href="../css/style.css" rel='stylesheet' type='text/css' />
    		 <!-- Custom Theme files -->
-            	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -28,10 +30,12 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../css/util.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link rel="stylesheet" type="text/css" href="../css/app.css">
 <!--===============================================================================================-->
    		 <!-- start-smoth-scrolling-->
 		<script type="text/javascript" src="../js/move-top.js"></script>
 		<script type="text/javascript" src="../js/easing.js"></script>
+		
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -68,38 +72,19 @@
 		<!----//End-top-nav-script---->
 	</head>
 	<body>
-        	<script src="../js/responsiveslides.min.js"></script>
-			 <script>
-			    // You can also use "$(window).load(function() {"
-			    $(function () {
-			      // Slideshow 4
-			      $("#slider4").responsiveSlides({
-			        auto: true,
-			        pager: true,
-			        nav: true,
-			        speed: 500,
-			        namespace: "callbacks",
-			        before: function () {
-			          $('.events').append("<li>before event fired.</li>");
-			        },
-			        after: function () {
-			          $('.events').append("<li>after event fired.</li>");
-			        }
-			      });
-			    });
-			  </script>
               <!-- show view -->      
-        <div>
-                {{>header}}
-            <div class="body">
-                {{{body}}}
-            </div>    
-                {{>footer}}       
-        </div>
+					<div>
+							{{>header}}
+						<div class="body">
+							{{{body}}}
+						</div>    
+							{{>footer}}       
+					</div>
 
             <!--End show view--->
-
-<script src="../js/jquery-3.2.1.min.js"></script>
+	<script src="../js/responsiveslides.min.js"></script>
+	<script src="../js/slide.js"></script>
+	<script src="../js/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="../js/animsition.min.js"></script>
 <!--===============================================================================================-->
@@ -115,5 +100,4 @@
 <!--===============================================================================================-->
 	<script src="../js/main.js"></script>
 	</body>
-</html>
 </html>

@@ -1,28 +1,6 @@
-<script src="../js/responsiveslides.min.js"></script>
-			 <script>
-			    // You can also use "$(window).load(function() {"
-			    $(function () {
-			      // Slideshow 4
-			      $("#slider4").responsiveSlides({
-			        auto: true,
-			        pager: true,
-			        nav: true,
-			        speed: 500,
-			        namespace: "callbacks",
-			        before: function () {
-			          $('.events').append("<li>before event fired.</li>");
-			        },
-			        after: function () {
-			          $('.events').append("<li>after event fired.</li>");
-			        }
-			      });
-			
-			    });
-			  </script>
-			<!----//End-slider-script---->
-			<!-- Slideshow 4 -->
-			    <div  id="top" class="callbacks_container">
-			      <ul class="rslides" id="slider4">
+
+	<div  id="top" class="callbacks_container">
+			<ul class="rslides" id="slider4">
 			        <li>
 			          <img src="images/slide1.png" alt="">
 			          <div class="caption">
@@ -54,12 +32,12 @@
 			          </div>
 			        </li>
 			      </ul>
-			    </div>
-			    <div class="clearfix"> </div>
-			<!----- //End-slider---->
-			<!----content---->
-				<div class="content">
-					<div class="container">
+		</div>
+		<div class="clearfix"> </div>
+				<!----- //End-slider---->
+				<!----content---->
+		<div class="content">
+			<div class="container">
 				<!---top-row--->
 				<div class="top-row">
 					<div class="col-xs-4">
@@ -92,10 +70,10 @@
 							<a class="r-list-w" href="single-page.html"><img src="images/list-icon.png" title="list" /></a>
 						</div>
 					</div>
-					<vdi class="clearfix"> </div>
+				<div class="clearfix"> </div>
 				</div>
 				<!---top-row--->
-				<div class="container"> 
+			<div class="container"> 
 				<!----speical-products---->
 				<div class="special-products">
 					<div class="s-products-head">
@@ -109,22 +87,21 @@
 					</div>
 					<!----special-products-grids---->
 					<div class="special-products-grids">
-
 						<!-- VIEW SHOW PRODUCTS-->
 						{{#each products}}
 							<div class="col-md-3 special-products-grid text-center">
-								<a class="brand-name" href="single-page.html"><img src="/uploads/{{this.image}}" title="name" /></a> 
-								<a class="product-here" href="/product/{{this.slug}}"><img src="/uploads/{{this.image}}" title="{{this.name}}" /></a>
+							<a class="brand-name" href="single-page.html"><img id="image-slug"src="#" title="name" /></a> 
+								<a class="product-here" href="/product/{{this.slug}}"><img id="image-product" src="../{{this.image}}" title="{{this.name}}" /></a>
 								<h4><a href="/product/{{this.slug}}">{{this.name}}</a></h4>
 								<a class="product-btn" href="single-page.html"><span>{{this.price}}$</span><small>GET NOW</small><label> </label></a>
 							</div>
 						{{/each}}
 							<!-- END VIEW SHOW PRODUCTS-->
-
 						<div class="clearfix"> </div>
 					</div>
 					<!---//special-products-grids---->
 				</div>
 				<!---//speical-products---->
-				</div>
+			</div>
+		</div>
 	

@@ -8,8 +8,6 @@ const morgan = require('morgan');
 const db = require('./config/db');
 
 
-
-
 // connect to db 
 db.connect();
 
@@ -25,11 +23,10 @@ app.engine('hbs' , handlebars({
     layoutsDir: __dirname + '/src/views/',
     partialsDir: __dirname + '/src/views/partials/',
     helpers:{
-        sum : (a, b ) => a + b 
+        sum : (a, b) => a + b 
     }
 
 }));
-
 
 app.set('view engine' , 'hbs');
 app.set('views' , path.join(__dirname,'src','views'));
@@ -45,7 +42,6 @@ app.use(morgan('combined'));
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 
 // router init

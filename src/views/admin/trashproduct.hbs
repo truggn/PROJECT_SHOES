@@ -1,0 +1,103 @@
+<div class="container">
+    <div class="mt-4">
+      <h3>Table Revert Product</h3>
+  
+
+            <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Giá bán</th>
+                <th scope="col">Loại</th>
+                <th scope="col">Thời gian xóa trước đây</th>
+                <th scope="col">Phục hồi</th>
+                <th scope="col">Xóa vĩnh viễn</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+                <tr>
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.price}}</td>
+                    <td>{{this.slug}}</td>
+                    <td>{{this.createdAt}}</td>
+                    <td><a><button class="btn btn-primary btn-revert-product" data-id="{{this._id}}">Revert</button></a></td> <!--lấy idsp gán vào nút -->
+                    <td><a href="" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-product"><button class="btn btn-danger" >Delete</button></a></td>
+                </tr>
+            {{else}}
+            <tr>
+              <td colspan="5">
+                Không có sản phẩm nào. <a href="/admin/addproduct">Thêm sản phẩm mới</a
+              </td>
+            </tr>
+
+            {{/each}}
+        </tbody>
+        </table>
+</div>
+</div>
+
+<!--///////////////////////////// confirm delte ////////////////////////--->
+
+<div class="modal" id="delete-product" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xóa sản phẩm này vĩnh viễn khỏi hệ thống ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button id="btn-delete-product-forever" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--///////////////////////////// end confirm delte ////////////////////////--->
+<!--//////////////////// Delete hidden form -->
+<div>
+    <form name="delete-product-forever" method="POST"></form>
+    <form name="revert-product-form" method="POST"></form>
+</div>
+<!--//////////////////// Delete hiden form -->
+
+<script>
+        document.addEventListener('DOMContentLoaded' , function(){
+              var productId; // lay id 
+              var deleteForm = document.forms['delete-product-forever'];// xu ly lay form xoa
+              var revertForm = document.forms['revert-product-form']; // xử lý revert sản phẩm trong form
+              var btnDeleteProduct = document.getElementById('btn-delete-product-forever');  // button xoa vĩnh viễn sản phẩm
+              var btnRevertProduct = $('.btn-revert-product');// lấy tất cả các btn chứa id để khôi phục
+
+
+                // khi dialog confirm show  
+                $('#delete-product').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget); // Button that triggered the modal
+                    productId  = button.data('id');
+                    console.log(productId);// Extract info from data-* attributes
+                });
+
+                // xu ly su kien nut xoa
+                btnDeleteProduct.onclick = function(){
+                    deleteForm.action = '/admin/' + productId + '/force?_method=DELETE';
+                    deleteForm.submit();
+                };
+
+                // xử lý btn khôi phục sản phẩm 
+                btnRevertProduct.click(function(event){
+                    event.preventDefault(); // bỏ hàng vi mặc định của thẻ html
+                    var productId=  $(this).data('id')
+                    revertForm.action = '/admin/' + productId + '/revert?_method=PATCH'; // pacth xử lý phục hồi data theo id
+                    revertForm.submit();
+                })
+
+        });
+
+</script>
