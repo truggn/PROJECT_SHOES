@@ -1,11 +1,28 @@
 <div class="container">
-    <div class="mt-4">
+    <form class="mt-1" name="conteiner-form" action="/admin/form-action" method="POST">
       <h3>Table Revert Product</h3>
-  
+           <div class="row mb-3">
+               <div class="ml-3 mt-3 d-flex align-items-center">
+                  <select name="action" class="custom-select checkbox-select-all-options" required>
+                  <option value="" selected>---- Chọn hành động ----</option>
+                  <option value="delete">Xóa vĩnh viễn</option>
+                  <option value="revert">Phục hồi</option>
+                </select>
+              <button class="ml-3 btn btn-primary btn-sm  btn-checkedsumbit" disabled type="submit">Thực hiện</button>
 
-            <table class="table table-dark">
+      </div>
+           </div>
+      <div class="row">
+          <table class="table table-striped table-bordered dataTable no-footer">
         <thead>
             <tr>
+                <th>
+                    <div class="form-group form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" id="checkAll">
+                </label>
+              </div>
+                </th>
                 <th scope="col">STT</th>
                 <th scope="col">Tên sản phẩm</th>
                 <th scope="col">Giá bán</th>
@@ -18,25 +35,30 @@
         <tbody>
             {{#each products}}
                 <tr>
+                    <th><div class="form-group form-check">     
+                            <input class="form-check-input" type="checkbox" name="productId[]" value="{{this._id}}">  
+                        </div></th>
                     <th scope="row">{{sum @index 1}}</th>
                     <td>{{this.name}}</td>
                     <td>{{this.price}}</td>
                     <td>{{this.slug}}</td>
                     <td>{{this.createdAt}}</td>
-                    <td><a><button class="btn btn-primary btn-revert-product" data-id="{{this._id}}">Revert</button></a></td> <!--lấy idsp gán vào nút -->
-                    <td><a href="" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-product"><button class="btn btn-danger" >Delete</button></a></td>
+                    <td style="text-align: center;"><a><button class="btn btn fa fa-repeat btn-revert-product" data-id="{{this._id}}"></button></a></td> <!--lấy idsp gán vào nút -->
+                    <td style="text-align: center;"><a data-toggle="modal" data-id="{{this._id}}" data-target="#delete-product"><button class="btn btn fa fa-trash-o " style="color: red;" ></button></a></td>
                 </tr>
             {{else}}
             <tr>
               <td colspan="5">
-                Không có sản phẩm nào. <a href="/admin/addproduct">Thêm sản phẩm mới</a
+                Không có sản phẩm nào.
               </td>
             </tr>
 
             {{/each}}
         </tbody>
         </table>
-</div>
+      </div>
+            
+    </form>
 </div>
 
 <!--///////////////////////////// confirm delte ////////////////////////--->
@@ -75,6 +97,12 @@
               var revertForm = document.forms['revert-product-form']; // xử lý revert sản phẩm trong form
               var btnDeleteProduct = document.getElementById('btn-delete-product-forever');  // button xoa vĩnh viễn sản phẩm
               var btnRevertProduct = $('.btn-revert-product');// lấy tất cả các btn chứa id để khôi phục
+              // xử lý checkbox 
+              var checkboxAll = $('#checkAll'); // lây id của checkall
+              var productCheckboxItem = $('input[name="productId[]"]');// lấy id của các item  con
+              var checkAllSubmit =$('.btn-checkedsumbit'); // lấy class của checksubmit form
+              var containerForm = document.forms['conteiner-form'];
+
 
 
                 // khi dialog confirm show  
@@ -97,6 +125,30 @@
                     revertForm.action = '/admin/' + productId + '/revert?_method=PATCH'; // pacth xử lý phục hồi data theo id
                     revertForm.submit();
                 })
+
+                // xử lý nút checkall khi được click thì tất các các checkitem cũng dc chọn 
+                checkboxAll.change(function(){
+                  var isCheckedAll = $(this).prop('checked');
+                  productCheckboxItem.prop('checked' , isCheckedAll);
+                  renderCheckAllButtonSubmit();
+                });
+                // xử lý checked con nếu bỏ 1 check con thì checkall cũng sẽ không được chọn 
+                productCheckboxItem.change(function(){
+                   var isCheckedAll = productCheckboxItem.length === $('input[name="productId[]"]:checked').length;
+                    checkboxAll.prop('checked' ,isCheckedAll );
+                    renderCheckAllButtonSubmit();
+                })
+                // render lại check all submit button thực hiện 
+                function renderCheckAllButtonSubmit(){
+                  var checkedCount = $('input[name="productId[]"]:checked').length; // đếm xem có bao nhiêu check con đã được chọn.
+                  if(checkedCount > 0){
+                      checkAllSubmit.attr('disabled' , false);
+
+                  }else{
+                      checkAllSubmit.attr('disabled', true);
+                  }
+                };
+               
 
         });
 

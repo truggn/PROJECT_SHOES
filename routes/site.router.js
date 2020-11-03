@@ -1,7 +1,6 @@
 const express = require('express');
 
 const siteController = require('../controller/site.controller');
-const authMiddleware = require('../middleware/auth.middleware');
 
 const {UserValidator} = require('../validate/register.validate');
 
@@ -16,6 +15,20 @@ router.get('/login' , siteController.login);
 // [POST] // login
 
 router.post('/login' , siteController.postLogin);
+
+// GET logout.
+router.get('/logout', function(req, res, next) {
+    if (req.session) {
+      // delete session object
+      req.session.destroy(function(err) {
+        if(err) {
+          return next(err);
+        } else {
+          return res.redirect('/');
+        }
+      });
+    }
+  });
 
 
 

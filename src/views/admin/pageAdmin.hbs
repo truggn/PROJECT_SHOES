@@ -1,0 +1,207 @@
+<div class="container">
+    <form class="mt-1" method="POST" name="conteiner-form" action="/admin/handle-form-action">
+     <h3>Table Product</h3>
+     <div class="row mb-2">  
+      <div class="ml-3 mt-3 d-flex align-items-center">
+                  <select name="action" class="custom-select checkbox-select-all-options" required>
+                  <option value="" selected>---- Chọn hành động ----</option>
+                  <option  value="delete">Xóa</option>
+                  <option  value="updateSoLuong">Cập nhật số lượng</option>
+
+                </select>
+              <button class=" btn-checkedsumbit ml-3 btn btn-primary btn-sm" type="submit" disabled >Thực hiện</button>
+      </div>
+      <div id="bootstrap-data-table-export_filter" class="ml-3 mt-3 d-flex align-items-center dataTables_filter">
+            <label>
+              <input type="search" class="form-control form-control-sm" placeholder aria-controls="bootstrap-data-table-export">
+            </label>
+            <div  class=" ml-3 cart"><a href="#"><button class="btn fa fa-cart-plus "></button></a></div>
+      </div>
+      
+     </div>
+      <div class="row">
+              <table class="table table-striped table-bordered dataTable no-footer">
+        <thead>
+            <tr>
+                <th>
+                    <div class="form-group form-check ">
+                <label class="form-check-label">
+                  <input class="form-check-input " type="checkbox" value="" id="checkboxAll">
+                </label>
+              </div>
+                </th>
+                <th scope="col">STT</th>
+                <th scope="col">Tên sản phẩm
+                  {{{sort_table 'name' _sort}}} <!--Sort theo column name-->
+                </th>
+                <th scope="col">Giá bán
+                  {{{sort_table 'price' _sort}}}
+                </th>
+                <th scope="col">Loại
+                  {{{sort_table 'cars' _sort}}}
+                </th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Thời gian tạo
+                  {{{sort_table 'createdAt' _sort}}}
+                </th>
+                <th style="text-align: center;" scope="col">Add to Cart</th>
+                <th style="text-align: center;" scope="col">Sửa</th>
+                <th style="text-align: center;" scope="col">Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each products}}
+              <div>
+                    <tr>
+                      <th>
+                          <div class="form-group form-check">     
+                              <input class="form-check-input" type="checkbox" name="productId[]" value="{{this._id}}">  
+                          </div>
+                      </th>
+                      <th scope="row">{{sum @index 1}}</th>
+                      <td>{{this.name}}</td>
+                      <td>{{this.price}}</td>
+                      <td>{{this.slug}}</td>
+                      <td>{{this.soLuong}}</td>
+                      <td>{{this.createdAt}}</td>
+                      <td style="text-align: center;"><a href=""><button class="fa fa-cart-plus "></button></a></td>
+                      <td style="text-align: center;"><a href="/admin/page-admin/{{this._id}}/edit" data-id="{{this._id}}" class="fa fa-edit" ></a></td>
+                      <td style="text-align: center;"><a href=""><button type="submit" data-toggle="modal" data-name ="{{this.name}}" data-id="{{this._id}}" data-target="#form-confirm-delete-product"  class="enableEvent  btn fa fa-trash-o"></button></a></td>
+                </tr>
+              </div>   
+            {{else}}
+            <tr>
+              <td colspan="5">
+                Không có sản phẩm nào. <a href="/admin/addproduct">Thêm sản phẩm mới</a
+              </td>
+            </tr>
+            {{/each}}
+        </tbody>
+        </table>
+      </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-5 bot-left">
+                                       <div class="dataTables_info" id="bootstrap-data-table-export_info" role="status" aria-live="polite">Hiển thị 1 đến 10 trong số 50 bản ghi.</div>    
+                                   </div>
+                                   <div class="col-sm-12 col-md-7 bot-right">
+                                       <div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table-export_paginate" >
+                                           <ul class="pagination">
+                                               <li class="paginate_button page-item previous disabled" id="bootstrap-data-table-export_previous">
+                                                   <a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                               </li>
+                                               <li class="paginate_button page-item active"><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                               <li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                               <li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                               <li class="paginate_button page-item "><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                                               <li class="paginate_button page-item next" id="bootstrap-data-table-export_next"><a href="#" aria-controls="bootstrap-data-table-export" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
+                                           </ul>
+                                       </div>
+
+                                   </div> 
+              </div>
+          
+    </form>
+  </div>
+
+<!--///////////////// confirm delte ////////////////////////--->
+
+<div class="modal" id="form-confirm-delete-product" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xóa {{nameProduct}} khỏi hệ thống ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button id="btn-delete-product" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+<!--//////////////////// End confirm delte ////////////////////////--->
+<div>
+    <form name="delete-product-form" method="POST"></form>
+</div>
+<!--//////////////////// /////////////////////////// ////////////////////////-->
+<script>
+        document.addEventListener('DOMContentLoaded' , function(){
+            var productId;
+            var idUpdate;
+            var deleteForm = document.forms['delete-product-form'];// xu ly lay form xoa
+            var updateForm = document.forms['form-update-product'];
+              
+            var btnDeleteProduct = document.getElementById('btn-delete-product');
+              
+            
+              // xử lý checkbox
+            var checkBoxAll = $('#checkboxAll');
+            var productItemCheckbox = $('input[name="productId[]"]');
+            var checkAllSumbit = $('.btn-checkedsumbit');
+            var clickEventForm = $('.enableEvent');
+            var containerForm = $('form[name ="conteiner-form"]');
+              
+            
+                  // khi dialog confirm show  
+
+                        $('#form-confirm-delete-product').on('show.bs.modal', function (event) {
+                          var button = $(event.relatedTarget); 
+                          productId  = button.data('id');
+                          nameProduct = button.data('name'); 
+                         console.log("Id Product Delete:  "  +  productId );
+                        });
+                         $('#form-confirm-update-product').on('show.bs.modal', function (event) { 
+                          var button = $(event.relatedTarget); 
+                          idUpdate  = button.data('id');  // get IDProduct để update
+                         console.log("Id Product Update:  "  +  idUpdate );
+                         
+                        });
+
+                  // xu ly su kien nut xoa, bản ghi này sẽ được đưa vào thùng rác .
+                  
+                      btnDeleteProduct.onclick = function(){                     
+                        deleteForm.action = '/admin/' + productId + '?_method=DELETE';
+                        deleteForm.submit();
+                      };
+
+                  // xử lý checkbbox all khi dc click 
+                 checkBoxAll.change(function(){
+                    var isCheckedAll = $(this).prop('checked');
+                     productItemCheckbox.prop('checked' , isCheckedAll);
+                     renderCheckAllSubmitBtn();
+
+                 }); 
+
+                 // xử lý checkbox con  nếu bỏ checkbox con thì checkbox all cũng ko dc chọn
+                 productItemCheckbox.change(function(){
+                    var isCheckedAll = productItemCheckbox.length === $('input[name="productId[]"]:checked').length;
+                    checkBoxAll.prop('checked' ,isCheckedAll ); // xử lý checkall và bỏ check con
+                    renderCheckAllSubmitBtn();
+                 });
+              //    // render lại check all submit button thực hiện
+                 function renderCheckAllSubmitBtn(){
+                   var checkedCount = $('input[name="productId[]"]:checked').length;
+                    if(checkedCount > 0){
+                      checkAllSumbit.attr('disabled' , false); // xoa bo disabed trong atribuite cua btn thuc hien
+                    }else{
+                      checkAllSumbit.attr('disabled' , true);   // add disable ko khong check nao ca
+                    }
+                 };
+               clickEventForm.click(function(e){
+                 const isClickEvent = !$(this).hasClass('enableEvent')
+                 if(!isClickEvent){
+                   e.preventDefault();
+                 }
+
+               })
+
+      });
+
+</script>

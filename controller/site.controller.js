@@ -32,7 +32,10 @@ class siteController{
                     .catch(Error =>{})
                 })
             }else{
-                res.json({err: 'Email đã được sử dụng'});
+               res.redirect('/register' ,{title: "Vui lòng Đăng ký lại Tài khoản"});
+               
+                
+                
             }
         })
 
@@ -62,7 +65,8 @@ class siteController{
         })
     }
 
-    ///////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////// LOGOUT ?//////////////////////////
+    
    
 
 }
